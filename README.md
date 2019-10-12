@@ -7,4 +7,5 @@
 # My env
 1. ubuntu18.04 + GTX1080 
 2. keras2.2.5 + tensorflow-gpu1.13.1 + cuda10.0 + cudnn7.4.2 
- 不要使用windows完成，因为里面有个glob.glob会返回Windows的文件分隔符'\'，这个会导致一个地方出错
+# Note 
+不要使用windows完成，因为里面有个glob.glob会返回Windows的文件分隔符'\'，这个会导致一个地方出错
