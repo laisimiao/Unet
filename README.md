@@ -13,9 +13,7 @@ In this branch, you first need to create a new folder in this directory named **
 Next step is: you need download ISBI dataset([baidu drive](https://pan.baidu.com/s/10jsOj0XXc3A6RqdkT8VYDQ) pswd:jwix or [google drive](https://drive.google.com/open?id=1c20QNqo5earWk4HKe_VGwFdBpY959Mwb)) and extract it in this directory named **raw** in which there has three sudfolders: train, label and test.   
 Then you can run the code.
 # Results display
-Now I display a 7-th results from keras branch: 
-![ISBI Biomedical Image Segmentation keras](https://img04.sogoucdn.com/app/a/100520146/3758830f20644cbe7a2cb85fbede43ae)  
-a 7-th results from pytorch branch:  
+Now I display a 7-th results from pytorch branch:  
 ![ISBI Biomedical Image Segmentation pytorch](https://img01.sogoucdn.com/app/a/100520146/db87dd6f8564080358a3125b4bb806ed)  
 
 # Note
