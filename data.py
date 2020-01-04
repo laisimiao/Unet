@@ -4,9 +4,11 @@ import os
 import glob
 import cv2
 from libtiff import TIFF
+# no need of libtiff, can comment
 
 class dataProcess(object):
-	def __init__(self, out_rows, out_cols, data_path = "./raw/train", label_path = "./raw/label", test_path = "./test", npy_path = "./npydata", img_type = "tif"):
+	def __init__(self, out_rows, out_cols, data_path = "./raw/train", label_path = "./raw/label",
+				 test_path = "./raw/test", npy_path = "./npydata", result_path = "./results", img_type = "tif"):
 		# 数据处理类，初始化
 		self.out_rows = out_rows
 		self.out_cols = out_cols
@@ -15,8 +17,11 @@ class dataProcess(object):
 		self.img_type = img_type
 		self.test_path = test_path
 		self.npy_path = npy_path
+		self.result_path = result_path
 		if not os.path.exists(self.npy_path):
 			os.mkdir(self.npy_path)
+		if not os.path.exists(self.result_path):
+			os.mkdir(self.result_path)
 
 # 创建训练数据
 	def create_train_data(self):
@@ -25,7 +30,7 @@ class dataProcess(object):
 		print('Creating training images...')
 		print('-'*30)
 		imgs = glob.glob(self.data_path+"/*."+self.img_type)
-		print(len(imgs))
+		print("Number of train images is {}".format(len(imgs)))
 
 		imgdatas = np.ndarray((len(imgs),self.out_rows,self.out_cols,1), dtype=np.uint8)
 		imglabels = np.ndarray((len(imgs),self.out_rows,self.out_cols,1), dtype=np.uint8)
@@ -47,7 +52,7 @@ class dataProcess(object):
 		print('loading done')
 		np.save(self.npy_path + '/imgs_train', imgdatas)
 		np.save(self.npy_path + '/imgs_mask_train', imglabels)
-		print('Saving to .npy files done.')
+		print('Saving to imgs_train.npy and imgs_mask_train.npy files done.')
 
 # 创建测试数据
 	def create_test_data(self):
@@ -56,7 +61,8 @@ class dataProcess(object):
 		print('Creating test images...')
 		print('-'*30)
 		imgs = glob.glob(self.test_path+"/*."+self.img_type)
-		print(len(imgs))
+		imgs = sorted(imgs)
+		print("Number of test images is {}".format(len(imgs)))
 		imgdatas = np.ndarray((len(imgs),self.out_rows,self.out_cols,1), dtype=np.uint8)
 		for imgname in imgs:
 			midname = imgname[imgname.rindex("/")+1:]
@@ -108,4 +114,5 @@ if __name__ == "__main__":
 	mydata.create_test_data()
 
 	imgs_train,imgs_mask_train = mydata.load_train_data()
-	print(imgs_train.shape,imgs_mask_train.shape)
+	imgs_test = mydata.load_test_data()
+	print(imgs_train.shape,imgs_mask_train.shape, imgs_test.shape)

@@ -1,4 +1,5 @@
-import os 
+import os
+import glob
 #os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import numpy as np
 from keras.models import *
@@ -18,12 +19,13 @@ class myUnet(object):
 	def load_data(self):
 		mydata = dataProcess(self.img_rows, self.img_cols)
 		imgs_train, imgs_mask_train = mydata.load_train_data()
+		# [30, 512, 512, 1]
 		imgs_test = mydata.load_test_data()
 		return imgs_train, imgs_mask_train, imgs_test
 # 载入数据
 	def get_unet(self):
 		inputs = Input((self.img_rows, self.img_cols,1))
-		# 网络结构定义
+		# 网络结构定义，数据处理的时候已经转化为灰度图了
 
 		conv1 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(inputs)
 		print ("conv1 shape:",conv1.shape)
@@ -80,6 +82,7 @@ class myUnet(object):
 		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 		conv9 = Conv2D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 		conv10 = Conv2D(1, 1, activation = 'sigmoid')(conv9)
+		# [batch, 512, 512, 1]
 
 		model = Model(input = inputs, output = conv10)
 		model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'])
@@ -94,7 +97,7 @@ class myUnet(object):
 		print("got unet")
 		model_checkpoint = ModelCheckpoint('my_unet.hdf5', monitor='loss',verbose=1, save_best_only=True)
 		print('Fitting model...')
-		model.fit(imgs_train, imgs_mask_train, batch_size=2, nb_epoch=10, verbose=1,validation_split=0.2, shuffle=True, callbacks=[model_checkpoint])
+		model.fit(imgs_train, imgs_mask_train, batch_size=2, nb_epoch=100, verbose=1,validation_split=0.2, shuffle=True, callbacks=[model_checkpoint])
 
 		print('predict test data')
 		imgs_mask_test = model.predict(imgs_test, batch_size=1, verbose=1)
@@ -103,12 +106,16 @@ class myUnet(object):
 	def save_img(self):
 		print("array to image")
 		imgs = np.load('./results/imgs_mask_test.npy')
+		imgs_name = sorted(glob.glob("./raw/test"+"/*."+"tif"))
 		for i in range(imgs.shape[0]):
 			img = imgs[i]
+			imgname = imgs_name[i]
+			midname = imgname[imgname.rindex("/") + 1:]
+			img_order = midname[:-4]
 			img = array_to_img(img)
-			img.save("./results/%d.jpg"%(i))
+			img.save("./results/%s.jpg"%(img_order))
 
 if __name__ == '__main__':
 	myunet = myUnet()
 	myunet.train()
-	myunet.save_img()
+	# myunet.save_img()
