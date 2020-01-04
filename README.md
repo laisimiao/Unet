@@ -1,7 +1,6 @@
 # Unet
-In this branch, it's written in Keras and mostly copy from: 
-https://github.com/decouples/Unet 
-Because my research direction is not Biomedical Image Segmentation, I do this just for interest and I repaire a mis-match problem between test and predict images. So, I re-produce it in Pytorch 1.0.0(pytorch branch), and use ISBI dataset(http://brainiac2.mit.edu/isbi_challenge/). You can also download from my link below in ** "How to run" **.
+In this branch, it's written in Keras and mostly copy from: https://github.com/decouples/Unet  
+Because my research direction is not Biomedical Image Segmentation, I do this just for interest and I repaire a mis-match problem between test and predict images. So, I re-produce it in Pytorch 1.0.0(pytorch branch), and use ISBI dataset(http://brainiac2.mit.edu/isbi_challenge/). You can also download from my link below in **How to run**.
 ps: I don't use any data augmentation methods. My chinese blog is here. 
 # My env
 1. ubuntu18.04 + GTX TITAN XP  
@@ -17,4 +16,4 @@ Then you can run the code.
 Now I display a 7-th results from keras branch: 
 ![ISBI Biomedical Image Segmentation](https://img04.sogoucdn.com/app/a/100520146/3758830f20644cbe7a2cb85fbede43ae)
 # Note
-In windows, it has some small mistakes with ** glob.glob **, but in pytorch branch it has no this bug.
+In windows, it has some small mistakes with **glob.glob**, but in pytorch branch it has no this bug.
