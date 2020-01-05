@@ -14,7 +14,7 @@ Next step is: you need download ISBI dataset([baidu drive](https://pan.baidu.com
 Then you can run the code.
 # Results display
 Now I display a 7-th results from pytorch branch:  
-![ISBI Biomedical Image Segmentation pytorch](https://img01.sogoucdn.com/app/a/100520146/db87dd6f8564080358a3125b4bb806ed)  
+![6-pytorch.png](https://i.loli.net/2020/01/05/VPOWDj5Qzs1NIlo.png)  
 
 # Note
 In windows, it has some small mistakes with **glob.glob**, but in pytorch branch it has no this bug.
