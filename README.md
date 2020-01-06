@@ -1,7 +1,7 @@
 # Unet
 In this branch, it's written in Keras and mostly copy from: https://github.com/decouples/Unet  
 Because my research direction is not Biomedical Image Segmentation, I do this just for interest and I repaire a mis-match problem between test and predict images. So, I re-produce it in Pytorch 1.0.0([pytorch branch](https://github.com/laisimiao/Unet/tree/pytorch)), and use ISBI dataset(http://brainiac2.mit.edu/isbi_challenge/). You can also download from my link below in **How to run**.  
-**ps**: I don't use any data augmentation methods. My chinese blog is here. 
+**ps**: I don't use any data augmentation methods. My chinese blog is [here](https://blog.csdn.net/laizi_laizi/article/details/103863756). 
 # My env
 1. ubuntu18.04 + GTX TITAN XP  
 2. keras2.2.4 + tensorflow-gpu1.13.1 + cuda10.0 + cudnn7.4.2  
